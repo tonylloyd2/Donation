@@ -2,37 +2,7 @@
 session_start();
 include "./connect.php";
 require "./functions.php";
-// $email = $_POST['email'];
-// $password = $_POST['password'];
-// //DATABASE CONNECTION
-// $conn = new mysqli("localhost","root","","mchango");
-// if($conn->connect_error){
-//     die("Failed to connect :".$conn->connect_error);
-// }
-// else
-// {
-//     $stmt=$conn->prepare("select * from registration where email=?");
-//     $stmt->bind_param("s",$email);
-//     $stmt->execute();
-//     $stmt_result = $stmt->get_result();
-//     if($stmt_result->num_rows>0){
-//         $data=$stmt_result->fetch_assoc();
-//         if($data['password']===$password){
-//             echo"<h2>Login successful</h2>";
-//             header("Location:home.html");
-//         }
-//         else{
-//             echo"<h2>Invalid email or password please retry</h2>";
-//             header("Location:login.html");
-//         }
 
-//     }
-//     else{
-//         echo"<h2>Invalid email or password please retry</h2>";
-//         header("Location:login.html");
-
-//     }
-// }
 if (isset($_POST['login'])){
 $user_id = random_id(7);
 $email = htmlspecialchars($_POST['email']);
@@ -54,7 +24,7 @@ if(!empty($email) && !empty($password) ){
                 }           
                 $response = json_encode($data);
                 echo($response);
-                header("location:./dashboard/user_dashboard/user_dashboard.php");
+                header("location:./home.php");
                 die; 
             } 
             else {

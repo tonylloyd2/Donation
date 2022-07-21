@@ -1,10 +1,8 @@
 <?php
 session_start();
-include "./connect.php";
 
-// if ($connectdb ){
-//     echo "<script> alert ('connected successfully !!') </script>";
-// }
+include "./functions.php";
+// install();
 
 ?>
 

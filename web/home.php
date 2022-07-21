@@ -1,5 +1,20 @@
 <?php
 session_start();
+include "./connect.php";
+// echo "hello world";
+if (isset($_SESSION['user_id']) ){
+    $id = $_SESSION['user_id'];
+    $query = mysqli_query($connectdb,"SELECT * FROM users  where user_id = '$id'  limit 1");
+    $data = mysqli_fetch_assoc($query);
+}
+else{
+    echo "
+    <script>
+    alert('You are not loged in :');
+    location.replace('./index.php');
+    </script>
+    ";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -16,7 +31,7 @@ session_start();
                 <div class="container">
                     <div class="logo" >
                         <img src="images/logo.png" alt="mchango logo">
-
+                        <?php echo "Welcome : ".$data['name']; ?>
                     </div>
                     <nav>
                         <ul>
@@ -39,7 +54,11 @@ session_start();
                                 <a href="#joinsection">Donate</a>
                             </li>
                             <li>
-                                <a href="login.html">Sign out</a>
+                                <form action="./logout.php" method="post">
+                                    <a href="">
+                                    <button type="submit" style="background-color: blueviolet;border-radius:20px "> Sign out </button>    
+                                    </a>
+                                </form>
                             </li>
                         </ul>
 
@@ -111,7 +130,9 @@ session_start();
                 <form action="./donate/donate.html" method="post">
                 <div class="boxcontainer">
                     <div class="box">
-                        <div class="cardImage"></div>
+                        <div class="cardImage">
+                        <img src="<?php  echo $data['profile']; ?>" alt="" srcset="">
+                        </div>
                         <div class="programTitle">Education to every child</div>
                         <div class="donationCount">
                             Donation Goal : <span>Ksh650,000</span>
@@ -120,7 +141,9 @@ session_start();
                     </div>
                     <!--Box ends Here-->
                     <div class="box">
-                        <div class="cardImage"></div>
+                        <div class="cardImage">
+                        <img src="<?php  echo $data['profile']; ?>" alt="" srcset="">
+                        </div>
                         <div class="programTitle">Make life easier for them</div>
                         <div class="donationCount">
                             Donation Goal : <span>Ksh500,000</span>
@@ -129,7 +152,9 @@ session_start();
                     </div>
                     <!--Box ends Here-->
                     <div class="box">
-                        <div class="cardImage"></div>
+                        <div class="cardImage">
+                        <img src="<?php  echo $data['profile']; ?>" alt="" srcset="">
+                        </div>
                         <div class="programTitle">Dedicating to help affected families
 
                         </div>
@@ -140,7 +165,10 @@ session_start();
                     </div>
                     <!--Box ends Here-->
                     <div class="box">
-                        <div class="cardImage"></div>
+                        <div class="cardImage"> 
+                            <img src="<?php  echo $data['profile']; ?>" alt="" srcset="">
+                            
+                        </div>
                         <div class="programTitle">Support businesses for people</div>
                         <div class="donationCount">
                             Donation Goal : <span>Ksh100,000</span>

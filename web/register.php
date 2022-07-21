@@ -23,12 +23,13 @@ if(isset($_POST['signup'])){
     <div class="alert-box">
         <p class="alert">hello</p>
     </div>
-    <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+    <form autocomplete="off" enctype="multipart/form-data" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
         <div class="form" >
             <h1 class="heading" style="color:aquamarine ;">SIGN UP</h1>
             <input type="text" placeholder="name" autocomplete="off" class="name" required name="name">
             <input type="email" placeholder="email" autocomplete="off" class="email" required name="email">
             <input type="password" placeholder="password" autocomplete="off" class="password" required name="password">
+            <input type="file" name="image" id="image" placeholder="Profile Picture" accept="image/*" style="width:200px;"  required/>
             <button class="submit-btn" name="signup">register</button>
             <a href="login.php" class="link">already have an account? log in here</a>
         </div>

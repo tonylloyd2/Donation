@@ -1,7 +1,55 @@
 <?php
 //hass all the functional logistics .....just a single page site (:
-include "./connect.php";
+function install(){
+  if (file_exists('./connect.php')) {
+    include ("./connect.php");
+    echo "
+    <script>
+    location.replace('./index.php');
+    </script>
+    ";
+  }
+  else{
+    $myfile = fopen("./connect.php", "a") or die("Unable to open file!");
+    $write_data = "";
+    $write_data .= "\n";
+    fwrite($myfile, $write_data);      
+    echo "<script>
+           alert('lets walk you through the installation process : ') ; 
+           location.replace('./backup/install.php');
+          </script>"; 
+  }
+}
+function write_into_(){
 
+    $host = $_POST['host'];
+    $username = $_POST['username_db'];
+    $password = $_POST['password_db'];
+    $db_name = $_POST['name_db'];
+
+    $myfile = fopen("../connect.php", "a") or die("Unable to open file!");
+    $write_data = '
+                  <?php
+                    $host = "'.$host.'";
+                    $username = "'.$username.'";
+                    $password = "'.$password.'";
+                    $db_name = "'.$db_name.'";
+
+                    $connectdb = mysqli_connect($host,$username,$password,$db_name);
+
+                    if (!$connectdb)
+                    {
+                      echo "Connection failed<br>";
+                      echo "Error number: " . mysqli_connect_errno() . "<br>";
+                      echo "Error message: " . mysqli_connect_error() . "<br>";
+                      die();
+                    }
+                  ?>  
+                  ';
+fwrite($myfile, $write_data);
+}
+
+include "./connect.php";
 
 function random_id($length){   
     $alpha = array_merge(range('A','Z'));
@@ -49,15 +97,85 @@ function register($connectdb){
           </script>
           ";
     }
-    if ($proceed) { 
+if ($proceed) { 
         $user_id = random_id(5);
-       $sql = "INSERT INTO users(name , email , password , user_id)  VALUES ('$username', '$email', '$password' , '$user_id')";
-       $result = mysqli_query($connectdb,$sql);
-      if($result){
-          echo "<script> 
-          alert('registered successfully !!!');
-          </script>
-          ";
+        
+        $media_root = "./media/profiles/";
+        $upload_to = $media_root . basename($_FILES["image"]["name"]);
+        $image_url = "./media/profiles/".basename($_FILES["image"]["name"]);
+        $uploadOk = 1;
+        $imageFileType = strtolower(pathinfo($upload_to,PATHINFO_EXTENSION));
+        
+        $check = getimagesize($_FILES["image"]["tmp_name"]);
+          if($check !== false) {
+            $uploadOk = 1;
+          } 
+          else {
+            $data =["error" => "File is not an image."];
+            $response = json_encode($data);
+            echo($response);
+            $uploadOk = 0;
+          }
+        
+          if ($_FILES["image"]["size"] > 500000) {
+          $data = ["error" => "Sorry, your file is too large."];
+          $response = json_encode($data);
+          echo($response);
+          $uploadOk = 0;
+         }
+        
+        if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"&& $imageFileType != "gif" ) {
+          $data = ["error" => "Sorry, only JPG, JPEG, PNG & GIF files are allowed."];
+          $response = json_encode($data);
+          echo($response);
+          $uploadOk = 0;
+         }
+        
+        if ($uploadOk == 0) {
+          $data = ["error" => "Sorry, your file was not uploaded."];
+          $response = json_encode($data);
+          echo($response);
+         } 
+        
+         else {
+           if (move_uploaded_file($_FILES["image"]["tmp_name"], $upload_to)) {
+              $password = "";
+              $query= "INSERT INTO users(name , email , password , user_id , profile)  VALUES ('$username', '$email', '$password' , '$user_id' , '$image_url')";
+            if(mysqli_query($connectdb,$query)){
+                  $data = [
+                      'success' => 'Voter registered succesfully'
+                    ]; 
+                    $response = json_encode($data);
+                    echo "<script>
+                          alert('registration was successfull');
+                          alert('We recommend that you create your password');
+                          location.replace('./password.php');
+                          </script>";
+                    
+            }
+            else if(!mysqli_query($connectdb,$query)){
+              $data = [
+                  'error' => 'There was an error in your registration please try again'
+              ];
+              $response = json_encode($data);
+              echo($response);
+            }                                     
+          } 
+          else {
+            $data = ["error" => "Sorry, there was an error uploading your file."];
+            $response = json_encode($data);
+            echo($response);
+          }
+        }
+
+
+      //  $sql = "INSERT INTO users(name , email , password , user_id)  VALUES ('$username', '$email', '$password' , '$user_id')";
+      //  $result = mysqli_query($connectdb,$sql);
+      // if($result){
+      //     echo "<script> 
+      //     alert('registered successfully !!!');
+      //     </script>
+      //     ";
       // backup users data in txt file 
           $myfile = fopen("./backup/users_registry.txt", "a") or die("Unable to open file!");
           $sql1 = "select * from users where name='{$username}' limit 1";
@@ -69,6 +187,7 @@ function register($connectdb){
           $write_data .= $user_data['name']." ";
           $write_data .= $user_data['email']." ";
           $write_data .= $user_data['password']." ";
+          $write_data .= $user_data['profile']." ";
           $append = false;
           }
           fwrite($myfile, $write_data."\n");
@@ -81,7 +200,7 @@ function register($connectdb){
           header('Location:signup.php');
         }
 }
-}
+
 function login($connectdb){
 
 }
