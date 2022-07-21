@@ -139,8 +139,8 @@ if ($proceed) {
         
          else {
            if (move_uploaded_file($_FILES["image"]["tmp_name"], $upload_to)) {
-              $password = "";
-              $query= "INSERT INTO users(name , email , password , user_id , profile)  VALUES ('$username', '$email', '$password' , '$user_id' , '$image_url')";
+              $story = "";
+              $query= "INSERT INTO users(name , email , password , user_id , profile , story)  VALUES ('$username', '$email', '$password' , '$user_id' , '$image_url' , '$story')";
             if(mysqli_query($connectdb,$query)){
                   $data = [
                       'success' => 'Voter registered succesfully'

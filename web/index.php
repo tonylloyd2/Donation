@@ -38,6 +38,9 @@ include "./functions.php";
                                 <a href="#educationsection">Education</a>
                             </li>
                             <li>
+                                <a href="./stories.php">Stories </a>
+                            </li>
+                            <li>
                                 <a href="#gallerysection">Gallery</a>
                             </li>
                             <li>

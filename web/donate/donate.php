@@ -1,3 +1,10 @@
+<?php 
+session_start();
+if (isset($_SESSION['user_id']) ){
+  echo $_SESSION['user_id'];
+}
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -32,7 +39,8 @@
             <header>
                 <div class="container">
                     <div class="logo" >
-                        <link rel="icon" href="../images/download.jpg" type="image/x-icon" />
+                        <img src="../images/logo.png" alt="mchango logo">
+                        <!-- <link rel="icon" href="../images/download.jpg" type="image/x-icon" /> -->
                     </div>
                     <nav>
                         <ul>
@@ -54,12 +62,12 @@
                             <li>
                                 <a href="../home.php">Join us</a>
                             </li>
-                            <li>
+                            <!-- <li>
                                 <a href="../register.php">Sign up</a>
                             </li>
                             <li>
                                 <a href="../login.php">Sign in</a>
-                            </li>
+                            </li> -->
                         </ul>
 
                     </nav>

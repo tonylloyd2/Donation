@@ -3,18 +3,37 @@ session_start();
 include "./connect.php";
 // echo "hello world";
 if (isset($_SESSION['user_id']) ){
+   
     $id = $_SESSION['user_id'];
     $query = mysqli_query($connectdb,"SELECT * FROM users  where user_id = '$id'  limit 1");
     $data = mysqli_fetch_assoc($query);
+    
+    if(isset($_POST['post_my_story'])){
+        $story = $_POST['textarea'];    
+        echo $story;
+        $sql = "UPDATE USERS SET story='$story' WHERE user_id ='$id'";
+        if (mysqli_query($connectdb,$sql)) {
+            $data = [
+              'success' => 'Story posted succesfully'
+            ]; 
+            $response = json_encode($data);
+            // echo($response);
+
+        }
+    }
 }
 else{
+    // session_destroy();
     echo "
     <script>
-    alert('You are not loged in :');
     location.replace('./index.php');
     </script>
     ";
 }
+
+
+
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -47,6 +66,7 @@ else{
                             <li>
                                 <a href="#educationsection">Education</a>
                             </li>
+                            
                             <li>
                                 <a href="#gallerysection">Gallery</a>
                             </li>
@@ -67,15 +87,17 @@ else{
             </header>
             <!--Header ends here-->
             <div class="container">
-                <h1>Lets join Hands &<span>Save lives</span></h1>
-                <p>
-                    “You have not lived today until you have done something for someone who can never repay you.”
-                    John Bunyan
+                <h1>Together we will succeed by <span>saving  lives</span></h1>
+                <p style="color: green;">
+                    <b>
+                    "Tell us your story : "
+                    </b>
                 </p>
-                <button>Start with a little</button>
+                <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
+                <textarea name="textarea" id="" cols="150" rows="10"></textarea><br>
+                <button type="submit" name="post_my_story">Post my Story</button>
+                </form>
             </div>
-            
-
         </div>
         <!--Home section ends here-->
         <section class="fullcontainer" id="aboutsection">
@@ -129,7 +151,7 @@ else{
                 <h2 class="sectionTitle">Programs</h2>
                 <form action="./donate/donate.html" method="post">
                 <div class="boxcontainer">
-                    <div class="box">
+                    <!-- <div class="box">
                         <div class="cardImage">
                         <img src="<?php  echo $data['profile']; ?>" alt="" srcset="">
                         </div>
@@ -138,9 +160,9 @@ else{
                             Donation Goal : <span>Ksh650,000</span>
                         </div>
                         <button>Donate Now</button>
-                    </div>
+                    </div> -->
                     <!--Box ends Here-->
-                    <div class="box">
+                    <!-- <div class="box">
                         <div class="cardImage">
                         <img src="<?php  echo $data['profile']; ?>" alt="" srcset="">
                         </div>
@@ -149,11 +171,11 @@ else{
                             Donation Goal : <span>Ksh500,000</span>
                         </div>
                         <button>Donate Now</button>
-                    </div>
+                    </div> -->
                     <!--Box ends Here-->
                     <div class="box">
                         <div class="cardImage">
-                        <img src="<?php  echo $data['profile']; ?>" alt="" srcset="">
+                        <img src="<?php  echo $data['profile']; ?>" alt="" srcset="" width="100%">
                         </div>
                         <div class="programTitle">Dedicating to help affected families
 
@@ -166,7 +188,7 @@ else{
                     <!--Box ends Here-->
                     <div class="box">
                         <div class="cardImage"> 
-                            <img src="<?php  echo $data['profile']; ?>" alt="" srcset="">
+                            <img src="<?php  echo $data['profile']; ?>" alt="" srcset="" width="100%">
                             
                         </div>
                         <div class="programTitle">Support businesses for people</div>
@@ -269,8 +291,8 @@ else{
                 </p>
                 
                 <button class="joinNow">JOIN US</button>
-                <form action="./donate/donate.html" method="post">
-                <button class="donateBtn">CHANGA/DONATE</button>
+                <form action="./donate/donate.php" method="post">
+                <button class="donateBtn" type="submit">CHANGA/DONATE</button>
                 </form>
             </div>
 

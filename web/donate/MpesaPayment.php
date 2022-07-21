@@ -1,4 +1,5 @@
 <?php
+session_start();
 //Initialize the variables
 $consumer_key = 'le2T55B7KsJFmJKYxNl9g2p7ulf1kIVG';
 $consumer_secret = 'CGaREGUayoBltor7';
@@ -53,10 +54,20 @@ $curl_Tranfer2_response = json_decode(curl_exec($curl_Tranfer2));
 
 echo json_encode($curl_Tranfer2_response, JSON_PRETTY_PRINT);
 if($curl_Tranfer2_response){
+
+    if (isset($_SESSION['user_id']) ){
+        echo("
+        <script>
+            window.location.replace('../home.php');
+        </script>
+    ");    
+    }
+    else{
     echo("
         <script>
             window.location.replace('../');
         </script>
     ");
+    }
 }
 ?>
