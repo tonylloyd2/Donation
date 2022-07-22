@@ -3,11 +3,11 @@
 function install(){
   if (file_exists('./connect.php')) {
     include ("./connect.php");
-    echo "
-    <script>
-    location.replace('./index.php');
-    </script>
-    ";
+    // echo "
+    // <script>
+    // location.replace('./index.php');
+    // </script>
+    // ";
   }
   else{
     $myfile = fopen("./connect.php", "a") or die("Unable to open file!");
@@ -16,7 +16,7 @@ function install(){
     fwrite($myfile, $write_data);      
     echo "<script>
            alert('lets walk you through the installation process : ') ; 
-           location.replace('./backup/install.php');
+           location.replace('./install/install.php');
           </script>"; 
   }
 }
@@ -27,29 +27,46 @@ function write_into_(){
     $password = $_POST['password_db'];
     $db_name = $_POST['name_db'];
 
-    $myfile = fopen("../connect.php", "a") or die("Unable to open file!");
+    $myfile = fopen("../connect.php", "w") or die("Unable to open file!");
     $write_data = '
-                  <?php
-                    $host = "'.$host.'";
-                    $username = "'.$username.'";
-                    $password = "'.$password.'";
-                    $db_name = "'.$db_name.'";
+      <?php
+          $host = "'.$host.'";
+          $username = "'.$username.'";
+          $password = "'.$password.'";
+          $db_name = "'.$db_name.'";
 
-                    $connectdb = mysqli_connect($host,$username,$password,$db_name);
+          $connectdb = mysqli_connect($host,$username,$password,$db_name);
 
-                    if (!$connectdb)
-                    {
-                      echo "Connection failed<br>";
-                      echo "Error number: " . mysqli_connect_errno() . "<br>";
-                      echo "Error message: " . mysqli_connect_error() . "<br>";
-                      die();
-                    }
-                  ?>  
-                  ';
-fwrite($myfile, $write_data);
+          if (!$connectdb)
+          {
+            echo "Connection failed<br>";
+            echo "Error number: " . mysqli_connect_errno() . "<br>";
+            echo "Error message: " . mysqli_connect_error() . "<br>";
+            die();
+          }
+      ?>  
+      ';
+// fwrite($myfile, $write_data);
+if (fwrite($myfile ,$write_data) == true) {
+  // header("location:../index.php");
+  echo "
+  <script>
+  location.replace('../index.php');
+  </script>
+  ";
+}
+else if(fwrite($myfile ,$write_data) == false){
+  $data = [
+    'error' => 'the installation failed kindly retry'
+  ];    
+  $response = json_encode($data);
+  echo($response);
 }
 
-include "./connect.php";
+}
+  if (file_exists('./connect.php')) {
+    include "./connect.php";
+  }
 
 function random_id($length){   
     $alpha = array_merge(range('A','Z'));
@@ -148,8 +165,6 @@ if ($proceed) {
                     $response = json_encode($data);
                     echo "<script>
                           alert('registration was successfull');
-                          alert('We recommend that you create your password');
-                          location.replace('./password.php');
                           </script>";
                     
             }
@@ -168,16 +183,8 @@ if ($proceed) {
           }
         }
 
-
-      //  $sql = "INSERT INTO users(name , email , password , user_id)  VALUES ('$username', '$email', '$password' , '$user_id')";
-      //  $result = mysqli_query($connectdb,$sql);
-      // if($result){
-      //     echo "<script> 
-      //     alert('registered successfully !!!');
-      //     </script>
-      //     ";
       // backup users data in txt file 
-          $myfile = fopen("./backup/users_registry.txt", "a") or die("Unable to open file!");
+          $myfile = fopen("./install/users_registry.txt", "a") or die("Unable to open file!");
           $sql1 = "select * from users where name='{$username}' limit 1";
           $result =  mysqli_query($connectdb,$sql1);
           $user_data = mysqli_fetch_assoc($result);
@@ -191,8 +198,7 @@ if ($proceed) {
           $append = false;
           }
           fwrite($myfile, $write_data."\n");
-          // close($myfile);
-          // $_SESSION['name'] = $user_data['name'];
+          
           header('Location:login.php');
         }
         else{

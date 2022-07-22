@@ -17,30 +17,19 @@ $data = mysqli_fetch_assoc($query);
             /5.15.4/css/all.min.css">
     <!-- css -->
     <link rel="stylesheet" href="css/stories.css">
+    
 
 </head>
 <body>
-    
-   
-
     <section class="blog">
-        <h1 class="heading">Mchango stories</h1>
-
+        <h1 class="heading" style="color:blueviolet ;">Mchango stories</h1>
         <div class="box-container">
         <?php
           if (mysqli_num_rows($query) > 0) {
             # code...
-            for ($i=1; $i < 9 ; $i++) { 
+            for ($i=1; $i <= mysqli_num_rows($query) ; $i++) { 
                 $query_individual = mysqli_query($connectdb,"SELECT story , name , id , profile FROM users where id='$i' order by id;");
                 $individual_data = mysqli_fetch_assoc($query_individual);
-                # code...
-            
-            // while($data = mysqli_fetch_assoc($query)){    
-            
-            //     echo "
-                
-            //     ";
-          
           ?> 
             <div class="box shadow">
                 <div class="image">
@@ -54,7 +43,7 @@ $data = mysqli_fetch_assoc($query);
                     <p>Everything i've been through</p>
                     <form action="./view_story.php" method="post">
                         <a href="#" class="btn">
-                            <input type="text" value="<?php echo($individual_data['id']); ?>" name="id" hidden>
+                            <input type="text" value = "<?php echo($individual_data['name']); ?>" name="id" hidden>
                             <button type="submit" class="btn" name="post_my_story" style="color:green ;">read more</button>
                         </a>
                     </form>
@@ -67,85 +56,12 @@ $data = mysqli_fetch_assoc($query);
            else if (mysqli_num_rows($query) <= 0){
             
            ?>
+           <h1>
            <p>no story has been posted</p>
+           </h1>
           <?php
            }
           ?>
-            <!-- <div class="box shadow">
-
-                <div class="image">
-                    <img src="images/img/blog_2.jpg" alt="">
-                    <h3><i class="fas fa-heart"></i> 77</h3>
-                </div>
-                <div class="content">
-                    <h3>Users story caption
-                        </h3>
-                    <p>This is thestory of my life please help me how you can</p>
-                    <a href="#" class="btn">read more</a>
-                </div>
-
-            </div> -->
-
-            <!-- <div class="box shadow">
-
-                <div class="image">
-                    <img src="images/img/blog_3.jpg" alt="">
-                    <h3><i class="fas fa-heart"></i> 52</h3>
-                </div>
-                <div class="content">
-                    <h3>Users story caption
-                        </h3>
-                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. 
-                    Eaque, odit!</p>
-                    <a href="#" class="btn">read more</a>
-                </div>
-
-            </div> -->
-
-            <!-- <div class="box shadow">
-
-                <div class="image">
-                    <img src="images/img/blog_4.jpg" alt="">
-                    <h3><i class="fas fa-heart"></i> 80</h3>
-                </div>
-                <div class="content">
-                    <h3>Users story caption
-                        </h3>
-                    <p>This is thestory of my life please help me how you can</p>
-                    <a href="#" class="btn">read more</a>
-                </div>
-
-            </div> -->
-
-            <!-- <div class="box shadow">
-
-                <div class="image">
-                    <img src="images/img/blog_5.jpg" alt="">
-                    <h3><i class="fas fa-heart"></i> 50</h3>
-                </div>
-                <div class="content">
-                    <h3>Users story caption
-                    </h3>
-                    <p>This is thestory of my life please help me how you can</p>
-                    <a href="#" class="btn">read more</a>
-                </div>
-
-            </div> -->
-
-            <!-- <div class="box shadow">
-
-                <div class="image">
-                    <img src="images/img/blog_6.jpg" alt="">
-                    <h3><i class="fas fa-heart"></i> 40</h3>
-                </div>
-                <div class="content">
-                    <h3>Users story caption
-                        </h3>
-                    <p>This is thestory of my life please help me how you can</p>
-                    <a href="#" class="btn">read more</a>
-                </div>
-
-            </div> -->
         </div>
     </section>
 

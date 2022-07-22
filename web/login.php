@@ -23,31 +23,31 @@ session_start();
                     <nav>
                         <ul>
                             <li>
-                                <a href="#homesection">Home</a>
+                                <a href="./home.php">Home</a>
                             </li>
                             <li>
-                                <a href="#aboutsection">About us</a>
+                                <a href="./home.php">About us</a>
                             </li>
                             <li>
-                                <a href="#programsSection">programs</a>
+                                <a href="./home.php">programs</a>
                             </li>
                             <li>
-                                <a href="#educationsection">Education</a>
+                                <a href="./home.php">Education</a>
                             </li>
                             <li>
-                                <a href="#educationsection">Stories </a>
+                                <a href="./stories.php">Stories </a>
                             </li>
                             <li>
-                                <a href="#gallerysection">Gallery</a>
+                                <a href="./home.php">Gallery</a>
                             </li>
                             <li>
-                                <a href="#joinsection">Join us</a>
+                                <a href="./home.php">Join us</a>
                             </li>
                             <li>
-                                <a href="register.php">Sign up</a>
+                                <a href="./register.php">Sign up</a>
                             </li>
                             <li>
-                                <a href="login.php">Sign in</a>
+                                <a href="./login.php">Sign in</a>
                             </li>
                         </ul>
 
@@ -55,7 +55,7 @@ session_start();
                 </div>
             </header>
             
-    <form action="login_validate.php" method="post" style="padding-left:30% ;">     
+    <form action="login_validate.php" method="post" style="padding-left:10% ; align-items: center;align-content: center;">     
     <div class="form" style="justify-content: center;">
         <h1 class="heading" style="color: green; padding-left :100px;">LOGIN</h1>
         <input type="email" placeholder="email" autocomplete="off" class="email" required name="email">

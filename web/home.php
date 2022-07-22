@@ -8,19 +8,7 @@ if (isset($_SESSION['user_id']) ){
     $query = mysqli_query($connectdb,"SELECT * FROM users  where user_id = '$id'  limit 1");
     $data = mysqli_fetch_assoc($query);
     
-    if(isset($_POST['post_my_story'])){
-        $story = $_POST['textarea'];    
-        echo $story;
-        $sql = "UPDATE USERS SET story='$story' WHERE user_id ='$id'";
-        if (mysqli_query($connectdb,$sql)) {
-            $data = [
-              'success' => 'Story posted succesfully'
-            ]; 
-            $response = json_encode($data);
-            // echo($response);
-
-        }
-    }
+    
 }
 else{
     // session_destroy();
@@ -30,7 +18,22 @@ else{
     </script>
     ";
 }
-
+if(isset($_POST['post_my_story'])){
+    $story = $_POST['textarea'];    
+    echo $story;
+    $sql = " UPDATE USERS SET story='$story' WHERE user_id ='$id' ";
+    if (mysqli_query($connectdb,$sql)) {
+        $data = [
+          'success' => 'Story posted succesfully'
+        ]; 
+        $response = json_encode($data);
+        // echo($response);
+        echo "<script>
+        alert('Your story has been posted successfully');
+        location.replace('./home.php');
+            </script>";
+    }
+}
 
 
 
@@ -50,7 +53,9 @@ else{
                 <div class="container">
                     <div class="logo" >
                         <img src="images/logo.png" alt="mchango logo">
-                        <?php echo "Welcome : ".$data['name']; ?>
+                        <?php 
+                        echo "Welcome : ".$data['name']; 
+                        ?>
                     </div>
                     <nav>
                         <ul>

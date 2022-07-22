@@ -252,25 +252,25 @@ header nav ul li a:hover{
 .programs .boxcontainer .box:nth-child(1) .cardImage,
 .programs .boxcontainer .box:nth-child(1) .cardImage:after
 {
-        /* background-image: url(../images/programs/1.jpg); */
+        background-image: url(../images/programs/1.jpg);
 
 }
 .programs .boxcontainer .box:nth-child(2) .cardImage,
 .programs .boxcontainer .box:nth-child(2) .cardImage:after
 {
-        /* background-image: url(../images/programs/2.jpg); */
+        background-image: url(../images/programs/2.jpg);
 
 }
 .programs .boxcontainer .box:nth-child(3) .cardImage,
 .programs .boxcontainer .box:nth-child(3) .cardImage:after
 {
-        /* background-image: url(../images/programs/3.jpg); */
+        background-image: url(../images/programs/3.jpg);
 
 }
 .programs .boxcontainer .box:nth-child(4) .cardImage,
 .programs .boxcontainer .box:nth-child(4) .cardImage:after
 {
-        /* background-image: url(../images/programs/4.jpg); */
+        background-image: url(../images/programs/4.jpg);
 
 }
 .programs .boxcontainer .box:hover .cardImage:after{

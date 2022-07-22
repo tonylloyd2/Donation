@@ -3,7 +3,7 @@ include "../functions.php";
 
 if(isset($_POST['setup'])  ){
     write_into_();
-    header("location:../index.php");
+    
     
 }
 ?>
@@ -303,25 +303,25 @@ if(isset($_POST['setup'])  ){
              </div> <!-- end card -->
   </div> <!-- end card-container -->
 </div>
-<script>
-function signup() {
+    <script>
+    // function signup() {
 
-    let admin_verification ="qwerty123";
+    //     let admin_verification ="qwerty123";
 
-    var request_1 = prompt("Enter admin passcode provided by super admin : 'lloyd'");
+    //     var request_1 = prompt("Enter admin passcode provided by super admin : 'lloyd'");
 
-    if (request_1 != admin_verification) {
-        alert("Kindly Contact Admin lloyd for admin signing up");    
-    }
-    else if (request_1==admin_verification){
-         alert("Super admin 'lloyd' is currently working on admin registration forms kindly wait");
-    }
+    //     if (request_1 != admin_verification) {
+    //         alert("Kindly Contact Admin lloyd for admin signing up");    
+    //     }
+    //     else if (request_1==admin_verification){
+    //          alert("Super admin 'lloyd' is currently working on admin registration forms kindly wait");
+    //     }
 
-}
-function instruct(){
-       alert("for username and password if not configured leave blank to take parameters root and null password respectively");
-       die;
-    }
-</script>
+    // }
+    // function instruct(){
+    //        alert("for username and password if not configured leave blank to take parameters root and null password respectively");
+    //        die;
+    //     }
+    </script>
 </body>
 </html>
