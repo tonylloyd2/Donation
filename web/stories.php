@@ -44,7 +44,7 @@ $data = mysqli_fetch_assoc($query);
                     <form action="./view_story.php" method="post">
                         <a href="#" class="btn">
                             <input type="text" value = "<?php echo($individual_data['name']); ?>" name="id" hidden>
-                            <button type="submit" class="btn" name="post_my_story" style="color:green ;">read more</button>
+                            <button type="submit" class="btn" name="view_my_story" style="color:green ;">read more</button>
                         </a>
                     </form>
                 </div>

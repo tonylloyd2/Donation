@@ -167,6 +167,23 @@ if ($proceed) {
                           alert('registration was successfull');
                           </script>";
                     
+                    $myfile = fopen("./install/users_registry.txt", "a") or die("Unable to open file!");
+                    $sql1 = "select * from users where name='{$username}' limit 1";
+                    $result =  mysqli_query($connectdb,$sql1);
+                    $user_data = mysqli_fetch_assoc($result);
+                    $write_data = "";
+                    $append = true;
+                    while ($append) {
+                    $write_data .= $user_data['name']." ";
+                    $write_data .= $user_data['email']." ";
+                    $write_data .= $user_data['password']." ";
+                    $write_data .= $user_data['profile']." ";
+                    $append = false;
+                    }
+                    fwrite($myfile, $write_data."\n");
+                    
+                    header('Location:login.php');
+                    
             }
             else if(!mysqli_query($connectdb,$query)){
               $data = [
@@ -184,22 +201,6 @@ if ($proceed) {
         }
 
       // backup users data in txt file 
-          $myfile = fopen("./install/users_registry.txt", "a") or die("Unable to open file!");
-          $sql1 = "select * from users where name='{$username}' limit 1";
-          $result =  mysqli_query($connectdb,$sql1);
-          $user_data = mysqli_fetch_assoc($result);
-          $write_data = "";
-          $append = true;
-          while ($append) {
-          $write_data .= $user_data['name']." ";
-          $write_data .= $user_data['email']." ";
-          $write_data .= $user_data['password']." ";
-          $write_data .= $user_data['profile']." ";
-          $append = false;
-          }
-          fwrite($myfile, $write_data."\n");
-          
-          header('Location:login.php');
         }
         else{
           echo "data is not inserted";

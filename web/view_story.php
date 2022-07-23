@@ -1,11 +1,20 @@
 <?php
 // echo $_POST['id'];
+session_start();
 include "./connect.php";
 if(isset($_POST['post_my_story'])){
     $name = $_POST['id'];
     $query_individual = mysqli_query($connectdb,"SELECT story , name , id , profile FROM users where name='$name' limit 1;");
     $story = mysqli_fetch_assoc($query_individual);
 }
+if (isset($_SESSION['user_id']) ){
+   
+    $id = $_SESSION['user_id'];
+    $query_individual = mysqli_query($connectdb,"SELECT * FROM users  where user_id = '$id'  limit 1");
+    $story = mysqli_fetch_assoc($query_individual);
+       
+}
+
 
 
 ?>

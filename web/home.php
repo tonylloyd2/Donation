@@ -34,6 +34,13 @@ if(isset($_POST['post_my_story'])){
             </script>";
     }
 }
+if(isset($_POST['view_my_story'])){
+    
+        echo "<script>
+        location.replace('./view_story.php');
+            </script>";
+
+}
 
 
 
@@ -100,7 +107,9 @@ if(isset($_POST['post_my_story'])){
                 </p>
                 <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>" method="post">
                 <textarea name="textarea" id="" cols="150" rows="10"></textarea><br>
-                <button type="submit" name="post_my_story">Post my Story</button>
+                <button style="background-color: green;" type="submit" name="post_my_story">Post my Story</button>
+                <input type="text" value = "<?php echo($data['name']); ?>" name="id" hidden>
+                <button type="submit" name="view_my_story"style="background-color:blueviolet;" >view my Story</button>
                 </form>
             </div>
         </div>
