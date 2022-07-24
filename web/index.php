@@ -96,11 +96,11 @@ install();
                         <p>
                             Strong people don't put others down... They lift them up
                         </p>
-                        <form action="./donate/donate.php" method="post">
+                        <!-- <form action="./donate/donate.php" method="post"> -->
                         <button>
                             Become Now
                         </button>
-                        </form>
+                        <!-- </form> -->
                     </div>
                     <!--volunteer Box ends here-->
                     <div class="scholarshipBox">
@@ -108,18 +108,15 @@ install();
                         <p>
                             You have to lift a person up before you can really put them in their place
                         </p>
-                        <form action="./donate/donate.php" method="post">
+                        <!-- <form action="./donate/donate.php" method="post"> -->
                         <button>
                             Give immediately
                         </button>
-                        </form>
+                        <!-- </form> -->
 
                     </div>
                     <!--scholarship Box ends here-->
-                    
-
                 </div>
-
             </div>
         </section>
          <!--about section ends here-->
@@ -170,7 +167,6 @@ install();
                 </form>
                 <!--Box container Ends Here-->
             </div>
-
          </section>
          <!--Program section ends here-->
          <!--Education Section Starts-->

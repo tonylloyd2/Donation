@@ -78,7 +78,9 @@ if(isset($_POST['view_my_story'])){
                             <li>
                                 <a href="#educationsection">Education</a>
                             </li>
-                            
+                            <li>
+                                <a href="./stories.php">Stories </a>
+                            </li>
                             <li>
                                 <a href="#gallerysection">Gallery</a>
                             </li>
@@ -125,9 +127,11 @@ if(isset($_POST['view_my_story'])){
                             “Give, but give until it hurts.”
                             Mother Teresa 
                         </p>
+                        <form action="./donate/donate.php" method="post">
                         <button>
                             Donate Now
                         </button>
+                        </form>
 
                     </div>
                     <!--Donation Box ends here-->
@@ -162,57 +166,48 @@ if(isset($_POST['view_my_story'])){
          <!--about section ends here-->
          <section class="programs" id="programsSection">
             <div class="container">
-                <h2 class="sectionTitle">Programs</h2>
-                <form action="./donate/donate.html" method="post">
-                <div class="boxcontainer">
-                    <!-- <div class="box">
-                        <div class="cardImage">
-                        <img src="<?php  echo $data['profile']; ?>" alt="" srcset="">
+              <h2 class="sectionTitle">Programs</h2>
+                <form action="./donate/donate.php" method="post">
+                    <div class="boxcontainer">
+                        <div class="box">
+                            <div class="cardImage"></div>
+                            <div class="programTitle">Education to every child</div>
+                            <div class="donationCount">
+                                Donation Goal : <span>Ksh650,000</span>
+                            </div>
+                            <button>Donate Now</button>
                         </div>
-                        <div class="programTitle">Education to every child</div>
-                        <div class="donationCount">
-                            Donation Goal : <span>Ksh650,000</span>
+                        <!--Box ends Here-->
+                        <div class="box">
+                            <div class="cardImage"></div>
+                            <div class="programTitle">Make life easier for them</div>
+                            <div class="donationCount">
+                                Donation Goal : <span>Ksh500,000</span>
+                            </div>
+                            <button>Donate Now</button>
                         </div>
-                        <button>Donate Now</button>
-                    </div> -->
-                    <!--Box ends Here-->
-                    <!-- <div class="box">
-                        <div class="cardImage">
-                        <img src="<?php  echo $data['profile']; ?>" alt="" srcset="">
-                        </div>
-                        <div class="programTitle">Make life easier for them</div>
-                        <div class="donationCount">
-                            Donation Goal : <span>Ksh500,000</span>
-                        </div>
-                        <button>Donate Now</button>
-                    </div> -->
-                    <!--Box ends Here-->
-                    <div class="box">
-                        <div class="cardImage">
-                        <img src="<?php  echo $data['profile']; ?>" alt="" srcset="" width="100%">
-                        </div>
-                        <div class="programTitle">Dedicating to help affected families
+                        <!--Box ends Here-->
+                        <div class="box">
+                            <div class="cardImage"></div>
+                            <div class="programTitle">Dedicating to help affected families
 
+                            </div>
+                            <div class="donationCount">
+                                Donation Goal : <span>Ksh40,000</span>
+                            </div>
+                            <button>Donate Now</button>
                         </div>
-                        <div class="donationCount">
-                            Donation Goal : <span>Ksh40,000</span>
+                        <!--Box ends Here-->
+                        <div class="box">
+                            <div class="cardImage"></div>
+                            <div class="programTitle">Support businesses for people</div>
+                            <div class="donationCount">
+                                Donation Goal : <span>Ksh100,000</span>
+                            </div>
+                            <button>Donate Now</button>
                         </div>
-                        <button>Donate Now</button>
+                        <!--Box ends Here-->
                     </div>
-                    <!--Box ends Here-->
-                    <div class="box">
-                        <div class="cardImage"> 
-                            <img src="<?php  echo $data['profile']; ?>" alt="" srcset="" width="100%">
-                            
-                        </div>
-                        <div class="programTitle">Support businesses for people</div>
-                        <div class="donationCount">
-                            Donation Goal : <span>Ksh100,000</span>
-                        </div>
-                        <button>Donate Now</button>
-                    </div>
-                    <!--Box ends Here-->
-                </div>
                 </form>
                 <!--Box container Ends Here-->
             </div>
